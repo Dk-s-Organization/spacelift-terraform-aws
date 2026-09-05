@@ -3,7 +3,7 @@ version: "1.5.7"
 
 # Environment variables injected into the run
 environment:
-  TF_VAR_environment: sandbox
+  TF_VAR_environment: production
 
 # Lifecycle hooks (shell commands per phase)
 before_init:
