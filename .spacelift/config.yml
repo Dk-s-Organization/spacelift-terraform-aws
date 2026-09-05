@@ -1,0 +1,16 @@
+# Terraform / OpenTofu version for the run
+version: "1.5.7"
+
+# Environment variables injected into the run
+environment:
+  TF_VAR_environment: sandbox
+
+# Lifecycle hooks (shell commands per phase)
+before_init:
+  - terraform fmt -check
+before_apply:
+  - ./scripts/pre-apply-check.sh
+
+# Attach extra contexts by ID
+contexts:
+  - my-shared-context
