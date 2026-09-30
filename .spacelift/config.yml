@@ -1,5 +1,5 @@
 # Terraform / OpenTofu version for the run
-version: "1.5.7"
+version: "2"
 
 # Environment variables injected into the run
 environment:
