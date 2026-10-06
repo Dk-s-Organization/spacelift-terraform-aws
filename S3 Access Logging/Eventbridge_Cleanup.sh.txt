@@ -1,0 +1,48 @@
+#!/bin/bash
+
+set -e
+
+CENTRAL_REGION="us-east-1"
+BUS_NAME="s3-remediation-bus"
+RULE_NAME="S3BucketCreateForwarder"
+
+REGIONS=(
+  "us-east-1"
+  "us-east-2"
+  "us-west-2"
+  "ap-south-1"
+)
+
+echo "Starting cleanup..."
+
+# Remove targets and rules from all regions
+for REGION in "${REGIONS[@]}"
+do
+  echo "Cleaning region: $REGION"
+
+  # Remove target from rule
+  aws events remove-targets \
+    --rule "$RULE_NAME" \
+    --ids "1" \
+    --region "$REGION" || true
+
+  # Delete rule
+  aws events delete-rule \
+    --name "$RULE_NAME" \
+    --region "$REGION" || true
+done
+
+# Remove permission from custom bus
+aws events remove-permission \
+  --event-bus-name "$BUS_NAME" \
+  --statement-id allow-account \
+  --region "$CENTRAL_REGION" || true
+
+# Delete custom event bus
+aws events delete-event-bus \
+  --name "$BUS_NAME" \
+  --region "$CENTRAL_REGION" || true
+
+echo "======================================"
+echo "CLEANUP COMPLETED"
+echo "======================================"
