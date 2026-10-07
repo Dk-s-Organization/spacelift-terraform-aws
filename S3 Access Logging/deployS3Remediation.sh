@@ -14,6 +14,7 @@ REGIONS=(
   "us-east-2"
   "us-west-2"
   "ap-south-1"
+  "sa-east-1"
 )
 
 echo "Account: ${ACCOUNT_ID}"
