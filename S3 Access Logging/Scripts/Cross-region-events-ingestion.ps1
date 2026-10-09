@@ -1,4 +1,4 @@
-\$ProfileName     = "AdministratorPermissionSet-307946672793"
+\$ProfileName     = "  "
 \$HubRegion       = "us-east-1"
 \$RuleName        = "Forward-S3CreateBucket-To-Hub"
 \$RuleDescription = "Forwards regional S3 CreateBucket CloudTrail events to the central us-east-1 hub bus."
